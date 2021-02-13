@@ -194,24 +194,24 @@ public class ProjectController extends HttpServlet {
 					try {
 						updateProject(project.getId(), projectId, name, domain, technology, employeeList);
 					} catch (EmployeeManagementSystemException e) {
-						e.printStackTrace();
+						EmployeeManagementSystemLogger.error(Constants.EXCEPTION_MESSAGE_UPDATE_PROJECT, e);
 					}
 				}
 			} catch (EmployeeManagementSystemException e) {
-				e.printStackTrace();
+				EmployeeManagementSystemLogger.error(Constants.EXCEPTION_MESSAGE_ADD_PROJECT, e);
 			}
 		} else {
 			try {
 				updateProject(Integer.parseInt(id), projectId, name, domain, technology, employeeList);
 			} catch (EmployeeManagementSystemException e) {
-				e.printStackTrace();
+				EmployeeManagementSystemLogger.error(Constants.EXCEPTION_MESSAGE_UPDATE_PROJECT, e);
 			}
 		}
         RequestDispatcher view = request.getRequestDispatcher(LIST_PROJECT);
         try {
 			request.setAttribute("projectList", getProjectByStatus("active"));
 		} catch (EmployeeManagementSystemException e) {
-			e.printStackTrace();
+			EmployeeManagementSystemLogger.error(Constants.EXCEPTION_MESSAGE_VIEWBY_STATUS, e);
 		}
         request.setAttribute("status", "active");
         view.forward(request, response);
