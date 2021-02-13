@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd">
+ 
+<hibernate-mapping>  
+  <class name = "com.ideas2it.employee.model.Address" table = "address">      
+      <id name = "addressId" type = "int" column = "address_id">
+         <generator class="increment"/>
+      </id>
+      <property name ="doorNo" type = "string" column = "door_no"></property>
+      <property name="streetName" type="string" column="street"></property>  
+      <property name="city" type="string" column="city"></property>  
+      <property name="state" type="string" column="state"></property>
+      <property name="pincode" type="int" column="pincode"></property>   
+      <many-to-one name="employee" class="com.ideas2it.employee.model.Employee"
+            column="employee_id" not-null="true"/>
+   </class>            
+</hibernate-mapping>  

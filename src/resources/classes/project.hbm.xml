@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?> 
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-5.3.dtd"> 
+ 
+<hibernate-mapping>
+	<class name="com.ideas2it.project.model.Project" table="project">
+		<id name="id" column="project_id" type="int">
+		<generator class="increment"/>
+		</id>		
+        <property name="projectId" column="project_reg_id" type="string"/>
+		<property name="name" column="name" type="string"/>
+		<property name="domain" column="domain" type="string"/>
+		<property name="technology" column="technology" type="string"/>
+		<property name="isDeleted" column="is_deleted" type="boolean"/>
+		
+		<bag name="employeeList" table="employee_project">  
+    		<key column="project_id"/>  
+        	<many-to-many class="com.ideas2it.employee.model.Employee" column="employee_id"/>  
+        </bag>
+    </class>
+</hibernate-mapping>
