@@ -3,7 +3,13 @@
     <groupId>Ideas2It_Training</groupId>
     <artifactId>Ideas2It_Training</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <name>Ideas2It_Training Maven Webapp</name>
+    <packaging>war</packaging>
+    <url>http://maven.apache.org</url>
+    <properties>
+     	<maven.compiler.source>1.8</maven.compiler.source>
+     	<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
     <dependencies>
     	<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
 		<dependency>
@@ -53,12 +59,6 @@
 		    <artifactId>hibernate-c3p0</artifactId>
 		    <version>5.3.20.Final</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations -->
-		<!-- <dependency>
-		    <groupId>org.hibernate.common</groupId>
-		    <artifactId>hibernate-commons-annotations</artifactId>
-		    <version>5.0.4.Final</version>
-		</dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations -->
 		<dependency>
 		    <groupId>org.hibernate.common</groupId>
@@ -139,23 +139,11 @@
 		    <version>3.0.7</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jboss/jandex -->
-		<!-- <dependency>
-		    <groupId>org.jboss</groupId>
-		    <artifactId>jandex</artifactId>
-		    <version>2.0.5.Final</version>
-		</dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.jboss/jandex -->
 		<dependency>
 		    <groupId>org.jboss</groupId>
 		    <artifactId>jandex</artifactId>
 		    <version>2.1.3.Final</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
-		<!-- <dependency>
-		    <groupId>org.javassist</groupId>
-		    <artifactId>javassist</artifactId>
-		    <version>3.23.2-GA</version>
-		</dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
 		<dependency>
 		    <groupId>org.javassist</groupId>
@@ -274,4 +262,22 @@
 		    <version>2.3.1</version>
 		</dependency>
     </dependencies>
+    <build>
+        <finalName>Ideas2It_Training</finalName>
+        <plugins>
+            <!-- http://mvnrepository.com/artifact/org.eclipse.jetty/jetty-maven-plugin -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.36.v20210114</version>
+                 
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/Ideas2It_Training</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
