@@ -13,8 +13,12 @@ import main.java.com.ideas2it.project.dao.ProjectDAOImpl;
  * @description: Project Service used to perform view, remove, add, update and restore operations in project data
  * @author     : Sivabhagya Jawahar
  */
+@Service
+@Transactional
 public class ProjectService {
-	ProjectDAO projectDAO = new ProjectDAOImpl();
+	
+	@Autowired
+	ProjectDAO projectDAO;
 	
 	/**
      * @description: Method to create a project 
@@ -26,12 +30,9 @@ public class ProjectService {
      * @return     : true/false boolean
 	 * @throws EmployeeManagementSystemException 
      */  
-    public Project addProject(String projectId, String name, String domain, String technology) throws EmployeeManagementSystemException{
-    	Project project = new Project();
-    	project.setProjectId(projectId);
-    	project.setName(name);
-    	project.setDomain(domain);
-    	project.setTechnology(technology);
+	@Override
+    @Transactional
+    public Project addProject(Project project) throws EmployeeManagementSystemException{
         return projectDAO.addProject(project);
     }
     
@@ -46,38 +47,12 @@ public class ProjectService {
      * @return     : true/false boolean
      * @throws EmployeeManagementSystemException 
      */  
-    public boolean updateProject(int id, String projectId, String name, String domain, String technology, List<Employee> employeeList) throws EmployeeManagementSystemException{
-    	Project project = new Project();
-    	project.setId(id);
-    	project.setProjectId(projectId);
-    	project.setName(name);
-    	project.setDomain(domain);
-    	project.setTechnology(technology);
-    	project.setEmployeeList(setProjectInEmployee(employeeList, project));
+	@Override
+    @Transactional
+    public boolean updateProject(Project project) throws EmployeeManagementSystemException{
     	return projectDAO.updateProject(project);	
     } 
     
-    /**
-     * @description: method to set project in employee list
-     * @param employeeList
-     * @param project
-     * @return employeeList
-     */
-    public List<Employee> setProjectInEmployee(List<Employee> employeeList, Project project) {
-    	for (Employee employee : employeeList) {
-    		List<Project> tempProjectList = new ArrayList<>();
-			if (employee.getProjectlist() != null && !employee.getProjectlist().isEmpty()) {
-				for (Project proObj : employee.getProjectlist()) {
-					if (proObj != null) {
-						tempProjectList.add(proObj);
-					}
-				}
-			}
-			tempProjectList.add(project);
-			employee.setProjectlist(tempProjectList);
-		}
-    	return employeeList;
-    }
     
     /**
      * @description: Method to delete the project
@@ -86,6 +61,8 @@ public class ProjectService {
      * @return     : true/false boolean
      * @throws EmployeeManagementSystemException 
      */ 
+	@Override
+    @Transactional
     public boolean deleteProject(String id) throws EmployeeManagementSystemException {
     	return projectDAO.deleteProject(id);
     }
@@ -97,6 +74,8 @@ public class ProjectService {
      * @return     : true/false boolean
      * @throws EmployeeManagementSystemException 
      */ 
+	@Override
+    @Transactional
     public boolean restoreProject(String id) throws EmployeeManagementSystemException{
     	return projectDAO.restoreProject(id);
     }
@@ -108,6 +87,8 @@ public class ProjectService {
      * @return     : project Project
      * @throws EmployeeManagementSystemException 
      */ 
+	@Override
+    @Transactional
     public Project getProjectById(String id) throws EmployeeManagementSystemException{
     	return projectDAO.getProjectById(id);
     }
@@ -120,6 +101,8 @@ public class ProjectService {
      * @return     : projectList 
      * @throws EmployeeManagementSystemException 
      */ 
+	@Override
+    @Transactional
     public List<Project> getProjectByProjectId(String projectId, String status) throws EmployeeManagementSystemException{
     	return projectDAO.getProjectByProjectId(projectId, status);
     }
@@ -130,6 +113,8 @@ public class ProjectService {
      * @return     : projectList List<Project>
      * @throws EmployeeManagementSystemException 
      */
+	@Override
+    @Transactional
     public List<Project> getProjectByStatus(String status) throws EmployeeManagementSystemException{
     	return projectDAO.getProjectByStatus(status);
     }
@@ -141,6 +126,8 @@ public class ProjectService {
      * @return     : List<Employee> Employeelist
      * @throws EmployeeManagementSystemException 
      */ 
+	@Override
+    @Transactional
     public List<Employee> getEmployeeByStatus(String status) throws EmployeeManagementSystemException{
     	return projectDAO.getEmployeeByStatus(status);
     }
@@ -152,6 +139,8 @@ public class ProjectService {
      * @return     : Employee
      * @throws EmployeeManagementSystemException 
      */ 
+	@Override
+    @Transactional
     public Employee getEmployeeById(String empId) throws EmployeeManagementSystemException{
     	return projectDAO.getEmployeeById(empId);
     }
